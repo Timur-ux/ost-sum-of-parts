@@ -1,0 +1,8 @@
+"Removes all slashes in the word before cursor"
+MT REMSLASH;
+	BEGIN
+	ALPHABET: 0,2,4,6,8,/,9,7,5,3,1;
+	MT L; LIB;
+	L; r;
+	DO () != _ ? r; IF / ? a(_); r FI; OD;
+END REMSLASH

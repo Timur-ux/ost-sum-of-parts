@@ -1,0 +1,7 @@
+"This mt is start normalization process
+ Must be called right before the copy of support data is started"
+MT BNORM;
+	BEGIN
+	ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
+	r; a(#); r;
+END BNORM

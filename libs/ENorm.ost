@@ -1,0 +1,24 @@
+"This mt ends normalization process
+ Delete all supporting trash that no longer needed
+ from starting position until # met"
+MT ENORM;
+	BEGIN
+	ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
+	MT SHIFTLEFT; LIB;
+
+	MT ENORMIMPL;
+		BEGIN
+		ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
+
+		DO () != # ? l; OD; l;
+		DO () != # ? l; OD;
+		r;
+		IF () != # ? SHIFTLEFT; ENORMIMPL; FI;
+	END ENORMIMPL;
+
+	a(#); r;
+	ENORMIMPL;
+	l; SHIFTLEFT;
+	l; SHIFTLEFT;
+	l; a(_);
+END ENORM

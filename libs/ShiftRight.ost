@@ -1,0 +1,49 @@
+"Shift all content at right(before 2 spaces) by 1 cell right
+ Cell at the right side of starting cell is become a lambda
+ and MT point at new empty cell at the end"
+MT SHIFTRIGHT;
+	BEGIN
+	ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
+	MT SRIMPL;
+		BEGIN
+		ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
+		DO () != _ ? r; IF _ ? r; FI; OD;
+		l;
+		DO () != # ? l;
+			IF
+				0 ? r; a(0); l;
+				1 ? r; a(1); l;
+				2 ? r; a(2); l;
+				3 ? r; a(3); l;
+				4 ? r; a(4); l;
+				5 ? r; a(5); l;
+				6 ? r; a(6); l;
+				7 ? r; a(7); l;
+				8 ? r; a(8); l;
+				9 ? r; a(9); l;
+				T ? r; a(T); l;
+				F ? r; a(F); l;
+				/ ? r; a(/); l;
+				_ ? r; a(_); l;
+			FI; 
+		OD;
+	END SRIMPL;
+	
+	IF
+		0 ? a(#); r; SRIMPL; a(0)
+		1 ? a(#); r; SRIMPL; a(1)
+		2 ? a(#); r; SRIMPL; a(2)
+		3 ? a(#); r; SRIMPL; a(3)
+		4 ? a(#); r; SRIMPL; a(4)
+		5 ? a(#); r; SRIMPL; a(5)
+		6 ? a(#); r; SRIMPL; a(6)
+		7 ? a(#); r; SRIMPL; a(7)
+		8 ? a(#); r; SRIMPL; a(8)
+		9 ? a(#); r; SRIMPL; a(9)
+		T ? a(#); r; SRIMPL; a(T)
+		F ? a(#); r; SRIMPL; a(F)
+		/ ? a(#); r; SRIMPL; a(/)
+		_ ? a(#); r; SRIMPL; a(_)
+	FI;
+	r; a(_);
+END SHIFTRIGHT

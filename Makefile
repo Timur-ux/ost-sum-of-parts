@@ -1,45 +1,47 @@
+flags=-g
+libdir=./compiledLibs/
 all: L R BNorm K K2 K3 ENorm RemSlash ShiftLeft ShiftRight ./main.ost
-	ost ./main.ost -l ./compiledLibs/ -o ./ -g
+	ost ./main.ost -l ${libdir} -o ./ ${flags}
 
 K: ./libs/K.ost
-	ost ./libs/K.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/K.ost -l ${libdir} -o ${libdir} ${flags}
 
 K2: ./libs/K2.ost
-	ost ./libs/K2.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/K2.ost -l ${libdir} -o ${libdir} ${flags}
 
 K3: ./libs/K3.ost
-	ost ./libs/K3.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/K3.ost -l ${libdir} -o ${libdir} ${flags}
 
 K4: ./libs/K4.ost
-	ost ./libs/K4.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/K4.ost -l ${libdir} -o ${libdir} ${flags}
 
 K5: ./libs/K5.ost
-	ost ./libs/K5.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/K5.ost -l ${libdir} -o ${libdir} ${flags}
 
 K6: ./libs/K6.ost
-	ost ./libs/K6.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/K6.ost -l ${libdir} -o ${libdir} ${flags}
 
 K7: ./libs/K7.ost
-	ost ./libs/K7.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/K7.ost -l ${libdir} -o ${libdir} ${flags}
 
 L: ./libs/L.ost
-	ost ./libs/L.ost -l ./compiledLibs/ -o ./compiledLibs/ -g 
+	ost ./libs/L.ost -l ${libdir} -o ${libdir} ${flags} 
 
 R: ./libs/R.ost
-	ost ./libs/R.ost -l ./compiledLibs/ -o ./compiledLibs/ -g 
+	ost ./libs/R.ost -l ${libdir} -o ${libdir} ${flags} 
 
 RemSlash: ./libs/RemSlash.ost
-	ost ./libs/RemSlash.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/RemSlash.ost -l ${libdir} -o ${libdir} ${flags}
 
 ShiftLeft: ./libs/ShiftLeft.ost
-	ost ./libs/ShiftLeft.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/ShiftLeft.ost -l ${libdir} -o ${libdir} ${flags}
 
 ShiftRight: ./libs/ShiftRight.ost
-	ost ./libs/ShiftRight.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/ShiftRight.ost -l ${libdir} -o ${libdir} ${flags}
 
 BNorm: ./libs/BNorm.ost
-	ost ./libs/BNorm.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/BNorm.ost -l ${libdir} -o ${libdir} ${flags}
 
 ENorm: ./libs/ENorm.ost
-	ost ./libs/ENorm.ost -l ./compiledLibs/ -o ./compiledLibs/ -g
+	ost ./libs/ENorm.ost -l ${libdir} -o ${libdir} ${flags}
 

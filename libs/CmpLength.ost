@@ -1,0 +1,40 @@
+"
+ Compares length of 2 words(only digits allowed) before cursor
+ Result 0 if length are equal
+ Result 1 if first word are longer
+ Result 2 if second word are longer
+"
+MT CMPLENGTH;
+	BEGIN
+	ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
+	MT BNORM; LIB;
+	MT ENORM; LIB;
+	MT K3; LIB;
+	MT L; LIB;
+	MT R; LIB;
+
+	MT CMPIMPL;
+		BEGIN
+		ALPHABET: 0,1,2,3,4,5,6,7,8,9;
+		L; r;
+		IF 
+			_ ? R; l;
+				IF 
+					_ ? r; a(0);
+					() != _ ? r**2; a(2);
+				FI;
+			() != _ ? a(_); R**2; l;
+				IF 
+					_ ? r; a(1);
+					() != _ ? a(_); L; CMPIMPL;
+				FI;
+			FI;
+	END CMPIMPL;
+
+	BNORM;
+	K3**2;
+	L;
+	CMPIMPL;
+	l;
+	ENORM;
+END CMPLENGTH

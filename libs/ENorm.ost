@@ -5,20 +5,20 @@ MT ENORM;
 	BEGIN
 	ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
 	MT SHIFTLEFT; LIB;
+	MT L; LIB;
 
 	MT ENORMIMPL;
 		BEGIN
 		ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
 
 		DO () != # ? l; OD; l;
-		DO () != # ? l; OD;
-		r;
 		IF () != # ? SHIFTLEFT; ENORMIMPL; FI;
 	END ENORMIMPL;
 
 	a(#); r;
 	ENORMIMPL;
-	l; SHIFTLEFT;
-	l; SHIFTLEFT;
-	l; a(_);
+	L; r; SHIFTLEFT;
+	L; r; SHIFTLEFT;
+	r; DO () != _ ? IF _ ? r; FI; OD;
+	DO _ ? l; OD; r;
 END ENORM

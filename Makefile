@@ -42,6 +42,9 @@ ShiftRight: ./libs/ShiftRight.ost
 BNorm: ./libs/BNorm.ost
 	ost ./libs/BNorm.ost -l ${libdir} -o ${libdir} ${flags}
 
-ENorm: ./libs/ENorm.ost
+ENorm: ./libs/ENorm.ost ShiftLeft
 	ost ./libs/ENorm.ost -l ${libdir} -o ${libdir} ${flags}
+
+CmpLength: ./libs/CmpLength.ost ENorm BNorm K3 L R
+	ost ./libs/CmpLength.ost -l ${libdir} -o ${libdir} ${flags}
 

@@ -1,0 +1,130 @@
+MT ISLESS;
+	BEGIN
+	ALPHABET: 0,1,2,3,4,5,6,7,8,9, T, F;
+	MT CMPLENGTH; LIB;
+	MT ENORM; LIB;
+	MT BNORM; LIB;
+	MT K3; LIB;
+	MT L; LIB;
+	MT R; LIB;
+
+	MT ISLESSDIGIT;
+		BEGIN
+		ALPHABET: 0,1,2,3,4,6,7,8,9,F,T;
+		l**3;
+		IF
+			0 ? r**2; IF 0 ? r**2; a(F); ELSE r**2; a(T); FI;
+			1 ? r**2;
+				IF
+					0 ? r**2; a(F);
+					1 ? r**2; a(F);
+				ELSE r**2; a(T); FI;
+			2 ? r**2;
+				IF
+					0 ? r**2; a(F);
+					1 ? r**2; a(F);
+					2 ? r**2; a(F);
+				ELSE r**2; a(T); FI;
+			3 ? r**2;
+				IF
+					0 ? r**2; a(F);
+					1 ? r**2; a(F);
+					2 ? r**2; a(F);
+					3 ? r**2; a(F);
+				ELSE r**2; a(T); FI;
+			4 ? r**2;
+				IF
+					0 ? r**2; a(F);
+					1 ? r**2; a(F);
+					2 ? r**2; a(F);
+					3 ? r**2; a(F);
+					4 ? r**2; a(F);
+				ELSE r**2; a(T); FI;
+			5 ? r**2;
+				IF
+					0 ? r**2; a(F);
+					1 ? r**2; a(F);
+					2 ? r**2; a(F);
+					3 ? r**2; a(F);
+					4 ? r**2; a(F);
+					5 ? r**2; a(F);
+				ELSE r**2; a(T); FI;
+			6 ? r**2;
+				IF
+					7 ? r**2; a(T);
+					8 ? r**2; a(T);
+					9 ? r**2; a(T);
+				ELSE r**2; a(F); FI;
+			7 ? r**2;
+				IF
+					8 ? r**2; a(T);
+					9 ? r**2; a(T);
+				ELSE r**2; a(F); FI;
+			8 ? r**2;
+				IF
+					9 ? r**2; a(T);
+				ELSE r**2; a(F); FI;
+			9 ? r**4; a(F);
+		FI;
+		r;
+	END ISLESSDIGIT;
+
+	MT ISLESSIMPL;
+		BEGIN
+		ALPHABET: 0,1,2,3,4,5,6,7,8,9,F,T;
+
+		MT GETLASTDIGITS;
+			BEGIN
+			ALPHABET: 0,1,2,3,4,5,6,7,8,9,F,T;
+			MT GET;
+				BEGIN
+				ALPHABET: 0,1,2,3,4,5,6,7,8,9;
+				MT SHIFTLEFT; LIB;
+				L; r;
+				IF 
+					0 ? SHIFTLEFT; r; a(0); r;
+					1 ? SHIFTLEFT; r; a(1); r; 
+					2 ? SHIFTLEFT; r; a(2); r; 
+					3 ? SHIFTLEFT; r; a(3); r; 
+					4 ? SHIFTLEFT; r; a(4); r; 
+					5 ? SHIFTLEFT; r; a(5); r; 
+					6 ? SHIFTLEFT; r; a(6); r; 
+					7 ? SHIFTLEFT; r; a(7); r;
+					8 ? SHIFTLEFT; r; a(8); r;
+					9 ? SHIFTLEFT; r; a(9); r;
+				FI;
+			END GET;
+			L; GET; L; GET;
+		END GETLASTDIGITS;
+
+		l;
+		DO () != _ ?
+			r; GETLASTDIGITS; l;
+			IF
+			 0 ? a(_); l**2; IF 0 ? a(_); l; ISLESSIMPL; ELSE r**2; a(0); r; ISLESSDIGIT; FI;
+			 1 ? a(_); l**2; IF 1 ? a(_); l; ISLESSIMPL; ELSE r**2; a(1); r; ISLESSDIGIT; FI;
+			 2 ? a(_); l**2; IF 2 ? a(_); l; ISLESSIMPL; ELSE r**2; a(2); r; ISLESSDIGIT; FI;
+			 3 ? a(_); l**2; IF 3 ? a(_); l; ISLESSIMPL; ELSE r**2; a(3); r; ISLESSDIGIT; FI;
+			 4 ? a(_); l**2; IF 4 ? a(_); l; ISLESSIMPL; ELSE r**2; a(4); r; ISLESSDIGIT; FI;
+			 5 ? a(_); l**2; IF 5 ? a(_); l; ISLESSIMPL; ELSE r**2; a(5); r; ISLESSDIGIT; FI;
+			 6 ? a(_); l**2; IF 6 ? a(_); l; ISLESSIMPL; ELSE r**2; a(6); r; ISLESSDIGIT; FI;
+			 7 ? a(_); l**2; IF 7 ? a(_); l; ISLESSIMPL; ELSE r**2; a(7); r; ISLESSDIGIT; FI;
+			 8 ? a(_); l**2; IF 8 ? a(_); l; ISLESSIMPL; ELSE r**2; a(8); r; ISLESSDIGIT; FI;
+			 9 ? a(_); l**2; IF 9 ? a(_); l; ISLESSIMPL; ELSE r**2; a(9); r; ISLESSDIGIT; FI;
+			 _ ? a(F); r;
+			FI;
+		OD;
+		l;
+	END ISLESSIMPL;
+
+	BNORM;
+	K3**2;
+	CMPLENGTH; l;
+	IF
+		1 ? a(F)
+		2 ? a(T)
+		0 ? a(_); l; ISLESSIMPL;
+	FI;
+	l;
+	ENORM;
+END ISLESS

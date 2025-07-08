@@ -1,6 +1,6 @@
 flags=-g
 libdir=./compiledLibs/
-all: L R BNorm K K2 K3 ENorm RemSlash ShiftLeft ShiftRight ./main.ost
+all: L R BNorm K K2 K3 ENorm RemSlash ShiftLeft ShiftRight IsLess ./main.ost
 	ost ./main.ost -l ${libdir} -o ./ ${flags}
 
 K: ./libs/K.ost
@@ -47,4 +47,7 @@ ENorm: ./libs/ENorm.ost ShiftLeft
 
 CmpLength: ./libs/CmpLength.ost ENorm BNorm K3 L R
 	ost ./libs/CmpLength.ost -l ${libdir} -o ${libdir} ${flags}
+
+IsLess: ./libs/IsLess.ost ENorm BNorm K3 L R
+	ost ./libs/IsLess.ost -l ${libdir} -o ${libdir} ${flags}
 

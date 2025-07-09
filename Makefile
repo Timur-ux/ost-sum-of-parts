@@ -51,3 +51,8 @@ CmpLength: ./libs/CmpLength.ost ENorm BNorm K3 L R
 IsLess: ./libs/IsLess.ost ENorm BNorm K3 L R
 	ost ./libs/IsLess.ost -l ${libdir} -o ${libdir} ${flags}
 
+Diff: ./libs/Diff.ost ENorm BNorm K2 K3 K L R ShiftLeft ShiftRight IsLess Reverse
+	ost ./libs/Diff.ost -l ${libdir} -o ${libdir} ${flags}
+
+Reverse: ./libs/Reverse.ost L R 
+	ost ./libs/Reverse.ost -l ${libdir} -o ${libdir} ${flags}

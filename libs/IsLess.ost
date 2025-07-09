@@ -111,10 +111,10 @@ MT ISLESS;
 			 7 ? a(_); l**2; IF 7 ? a(_); l; ISLESSIMPL; ELSE r**2; a(7); r; ISLESSDIGIT; FI;
 			 8 ? a(_); l**2; IF 8 ? a(_); l; ISLESSIMPL; ELSE r**2; a(8); r; ISLESSDIGIT; FI;
 			 9 ? a(_); l**2; IF 9 ? a(_); l; ISLESSIMPL; ELSE r**2; a(9); r; ISLESSDIGIT; FI;
-			 _ ? a(F); r;
 			FI;
 		OD;
 		l;
+		IF _ ? r; a(F); FI;
 	END ISLESSIMPL;
 
 	BNORM;

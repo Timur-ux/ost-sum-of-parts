@@ -63,3 +63,7 @@ IsEqual: ./libs/IsEqual.ost ENorm BNorm K3 L Reverse CmpLength R
 GCD: ./libs/GCD.ost ENorm BNorm K3 K2 L Diff IsEqual IsLess
 	ost ./libs/GCD.ost -l ${libdir} -o ${libdir} ${flags}
 
+Sum: ./libs/Sum.ost ENorm BNorm K2 K3 L R IsLess ShiftLeft ShiftRight Reverse
+	ost ./libs/Sum.ost -l ${libdir} -o ${libdir} ${flags}
+
+

@@ -1,0 +1,177 @@
+"Multiplies 2 numbers"
+MT MULT;
+	BEGIN
+	ALPHABET: 0,1,2,3,4,5,6,7,8,9;
+	MT BNORM; LIB;
+	MT ENORM; LIB;
+	MT SUM; LIB;
+	MT L; LIB;
+	MT R; LIB;
+	MT K3; LIB;
+	MT K4; LIB;
+	MT K2; LIB;
+
+	MT MULTBYDIGIT; "Destructable"
+		BEGIN
+		ALPHABET: 0,1,2,3,4,5,6,7,8,9;
+		l;
+		IF
+		 0 ? a(_); l**2; DO () != _ ? a(_); l; OD; r; a(0)
+		 1 ? a(_); l
+		 2 ? a(_); l**2;
+			DO () != _ ? 
+				IF
+					1 ? a(2)
+					2 ? a(4)
+					3 ? a(6)
+					4 ? a(8)
+					5 ? a(0); CARRY1
+					6 ? a(2); CARRY1
+					7 ? a(4); CARRY1
+					8 ? a(6); CARRY1
+					9 ? a(8); CARRY1
+				FI;
+				l;
+			OD;
+		 3 ? a(_); l**2;
+			DO () != _ ? 
+				IF
+					1 ? a(3)
+					2 ? a(6)
+					3 ? a(9)
+					4 ? a(2)
+					5 ? a(5); CARRY1
+					6 ? a(8); CARRY1
+					7 ? a(1); CARRY2
+					8 ? a(4); CARRY2
+					9 ? a(7); CARRY2
+				FI;
+				l;
+			OD;
+		 4 ? a(_); l**2;
+			DO () != _ ? 
+				IF
+					1 ? a(4)
+					2 ? a(8)
+					3 ? a(2); CARRY1
+					4 ? a(6); CARRY1
+					5 ? a(0); CARRY2
+					6 ? a(4); CARRY2
+					7 ? a(8); CARRY2
+					8 ? a(2); CARRY3
+					9 ? a(6); CARRY3
+				FI;
+				l;
+			OD;
+		 5 ? a(_); l**2;
+			DO () != _ ? 
+				IF
+					1 ? a(5)
+					2 ? a(0); CARRY1
+					3 ? a(5); CARRY1
+					4 ? a(0); CARRY2
+					5 ? a(5); CARRY2
+					6 ? a(0); CARRY3
+					7 ? a(5); CARRY3
+					8 ? a(0); CARRY4
+					9 ? a(5); CARRY4
+				FI;
+				l;
+			OD;
+		 6 ? a(_); l**2;
+			DO () != _ ? 
+				IF
+					1 ? a(6)
+					2 ? a(2); CARRY1
+					3 ? a(8); CARRY1
+					4 ? a(4); CARRY2
+					5 ? a(0); CARRY3
+					6 ? a(6); CARRY3
+					7 ? a(2); CARRY4
+					8 ? a(8); CARRY4
+					9 ? a(4); CARRY5
+				FI;
+				l;
+			OD;
+		 7 ? a(_); l**2;
+			DO () != _ ? 
+				IF
+					1 ? a(7)
+					2 ? a(4); CARRY1
+					3 ? a(1); CARRY2
+					4 ? a(8); CARRY2
+					5 ? a(5); CARRY3
+					6 ? a(2); CARRY4
+					7 ? a(9); CARRY4
+					8 ? a(6); CARRY5
+					9 ? a(3); CARRY6
+				FI;
+				l;
+			OD;
+		 8 ? a(_); l**2;
+			DO () != _ ? 
+				IF
+					1 ? a(8)
+					2 ? a(6); CARRY1
+					3 ? a(4); CARRY2
+					4 ? a(2); CARRY3
+					5 ? a(0); CARRY4
+					6 ? a(8); CARRY4
+					7 ? a(6); CARRY5
+					8 ? a(4); CARRY6
+					9 ? a(2); CARRY7
+				FI;
+				l;
+			OD;
+		 9 ? a(_); l**2;
+			DO () != _ ? 
+				IF
+					1 ? a(9)
+					2 ? a(8); CARRY1
+					3 ? a(7); CARRY2
+					4 ? a(6); CARRY3
+					5 ? a(5); CARRY4
+					6 ? a(4); CARRY5
+					7 ? a(3); CARRY6
+					8 ? a(2); CARRY7
+					9 ? a(1); CARRY8
+				FI;
+				l;
+			OD;
+		FI;
+	END MULTBYDIGIT;
+
+	MT GETLASTDIGIT;
+		BEGIN
+		ALPHABET: 0,1,2,3,4,5,6,7,8,9;
+		l;
+		IF
+			0 ? a(_); r; a(0) r;
+			1 ? a(_); r; a(1) r;
+			2 ? a(_); r; a(2) r;
+			3 ? a(_); r; a(3) r;
+			4 ? a(_); r; a(4) r;
+			5 ? a(_); r; a(5) r;
+			6 ? a(_); r; a(6) r;
+			7 ? a(_); r; a(7) r;
+			8 ? a(_); r; a(8) r;
+			9 ? a(_); r; a(9) r;
+		FI;
+	END GETLASTDIGIT;
+
+	BNORM;
+	r; a(0); r;
+	K4**2;
+	l; 
+	DO () != _ ? "_acc_w1_w2d_"
+		r; GETLASTDIGIT; "_acc_w1_w2_d_"
+		K3; K2; "_acc_w1_w2_d_w1_d_"
+		MULTBYDIGIT; "_acc_w1_w2_(w1xd)_"
+		BNORM; "_acc_w1_w2_(w1xd)_#_"
+		K5; K3; "_acc_w1_w2_(w1xd)_#_acc_(w1xd)_"
+		SUM; "_acc_w1_w2_(w1xd)_#_acc_(w1xd)_newacc_"
+		L; ENORM;  "_acc_w1_w2_(w1xd)_newacc_"
+		K4 ** 2;  "_acc_w1_w2_(w1xd)_newacc_w1_w2_"
+	OD; "..._acc_w1__"
+	l; K2; L; ENORM; "_w1_w2_(w1xw2)"
+END MULT

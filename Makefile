@@ -48,7 +48,7 @@ ENorm: ./libs/ENorm.ost ShiftLeft
 CmpLength: ./libs/CmpLength.ost ENorm BNorm K3 L R
 	ost ./libs/CmpLength.ost -l ${libdir} -o ${libdir} ${flags}
 
-IsLess: ./libs/IsLess.ost ENorm BNorm K3 L R
+IsLess: ./libs/IsLess.ost ENorm BNorm K3 L R CmpLength
 	ost ./libs/IsLess.ost -l ${libdir} -o ${libdir} ${flags}
 
 Diff: ./libs/Diff.ost ENorm BNorm K2 K3 K L R ShiftLeft ShiftRight IsLess Reverse
@@ -56,3 +56,10 @@ Diff: ./libs/Diff.ost ENorm BNorm K2 K3 K L R ShiftLeft ShiftRight IsLess Revers
 
 Reverse: ./libs/Reverse.ost L R 
 	ost ./libs/Reverse.ost -l ${libdir} -o ${libdir} ${flags}
+
+IsEqual: ./libs/IsEqual.ost ENorm BNorm K3 L Reverse CmpLength R
+	ost ./libs/IsEqual.ost -l ${libdir} -o ${libdir} ${flags}
+
+GCD: ./libs/GCD.ost ENorm BNorm K3 K2 L Diff IsEqual IsLess
+	ost ./libs/GCD.ost -l ${libdir} -o ${libdir} ${flags}
+

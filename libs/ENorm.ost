@@ -17,8 +17,8 @@ MT ENORM;
 
 	a(#); r;
 	ENORMIMPL;
-	L; r; SHIFTLEFT;
-	L; r; SHIFTLEFT;
+	DO () != # ? l; OD; SHIFTLEFT;
+	DO () != # ? l; OD; SHIFTLEFT;
 	r; DO () != _ ? IF _ ? r; FI; OD;
 	DO _ ? l; OD; r;
 END ENORM

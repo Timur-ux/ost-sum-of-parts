@@ -218,11 +218,13 @@ MT DIFF;
 		FI;
 		l;
 	OD;
-	l ** 2;
-	IF  _ ? r; K2; REVERSE; K3; K2; L; SHIFTLEFT;
-	ELSE  r ** 2; l; REVERSE; FI;
+	l;
+	IF _ ? REVERSE;
+	ELSE K2; REVERSE; K3; K2; L; SHIFTLEFT FI;
 	L; r;
-	DO 0 ? SHIFTLEFT; L; r; OD;
-	IF _ ? a(0); FI; l;
+	DO
+		0 ? r; IF () != _ ? l; SHIFTLEFT; L; r; FI;
+	OD;
+	L;
 	ENORM;
 END DIFF;

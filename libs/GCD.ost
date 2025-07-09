@@ -1,0 +1,38 @@
+"Diff based euclidian algorithm to find GCD for 2 numbers"
+MT GCD;
+	BEGIN
+	ALPHABET: 0,1,2,3,4,5,6,7,8,9,F,T;
+	MT ISEQUAL; LIB;
+	MT BNORM; LIB;
+	MT ENORM; LIB;
+	MT ISLESS; LIB;
+	MT DIFF; LIB;
+	MT K3; LIB;
+	MT K2; LIB;
+	MT L; LIB;
+	MT R; LIB;
+
+
+	MT ORDERBYNONDECREASE; "order 2 words in non decrease (>=) order"
+		BEGIN
+		ALPHABET: 0,1,2,3,4,5,6,7,8,9,F,T;
+		BNORM;
+		K3 ** 2;
+		ISLESS; l;
+
+		IF T ? a(_); l; K2; 
+		ELSE  a(_); l; FI;
+
+		L**2; ENORM;
+	END ORDERBYNONDECREASE;
+
+	BNORM;
+	K3**2;
+	ISEQUAL; l;
+	DO () != T ?
+		a(_); l; ORDERBYNONDECREASE; DIFF; ISEQUAL; l;
+	OD;
+	a(_); l; L;
+	ENORM;
+	
+END GCD;

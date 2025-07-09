@@ -1,0 +1,42 @@
+"Checks if the 2 words before cursor are equal"
+MT ISEQUAL;
+	BEGIN
+	ALPHABET: 0,1,2,3,4,5,6,7,8,9,F,T;
+	MT REVERSE; LIB;
+	MT L; LIB;
+	MT R; LIB;
+	MT BNORM; LIB;
+	MT ENORM; LIB;
+	MT K3; LIB;
+	MT CMPLENGTH; LIB;
+	MT ISEQUALIMPL;
+		BEGIN
+		ALPHABET: 0,1,2,3,4,5,6,7,8,9,F,T;
+		l;
+		IF
+			0 ? a(_); L**2; r; IF () != 0 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			1 ? a(_); L**2; r; IF () != 1 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			2 ? a(_); L**2; r; IF () != 2 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			3 ? a(_); L**2; r; IF () != 3 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			4 ? a(_); L**2; r; IF () != 4 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			5 ? a(_); L**2; r; IF () != 5 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			6 ? a(_); L**2; r; IF () != 6 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			7 ? a(_); L**2; r; IF () != 7 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			8 ? a(_); L**2; r; IF () != 8 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			9 ? a(_); L**2; r; IF () != 9 ? R**2; r; a(F); ELSE a(_); R**2; ISEQUALIMPL; FI;
+			_ ? a(T);
+		FI;
+	END ISEQUALIMPL;
+
+	CMPLENGTH; l;
+	IF () != 0 ? a(F); r;
+	ELSE
+		a(_); l;
+		BNORM;
+		K3**2;
+		REVERSE;
+		K3;
+		ISEQUALIMPL;
+		l; ENORM;
+	FI;
+END ISEQUAL

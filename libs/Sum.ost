@@ -8,6 +8,7 @@ MT SUM;
 	MT R; LIB;
 	MT K2; LIB;
 	MT K3; LIB;
+	MT K4; LIB;
 	MT ISLESS; LIB;
 	MT SHIFTLEFT; LIB;
 	MT SHIFTRIGHT; LIB;
@@ -28,7 +29,7 @@ MT SUM;
 			7 ? a(8)
 			8 ? a(9)
 			9 ? a(0); DOCARRY
-			_ ? a(1)
+			_ ? SHIFTRIGHT; a(1)
 		FI;
 		R;
 	END DOCARRY;
@@ -92,24 +93,24 @@ MT SUM;
 		r;
 	END ISCARRYNEEDED;
 
-	MT MOVELASTDIGIT;
+	MT COPYLASTDIGIT;
 		BEGIN
 		ALPHABET: 0,1,2,3,4,5,6,7,8,9;
 		l;
 		IF
-			0 ? a(_); r; SHIFTLEFT; r; a(0)
-			1 ? a(_); r; SHIFTLEFT; r; a(1)
-			2 ? a(_); r; SHIFTLEFT; r; a(2)
-			3 ? a(_); r; SHIFTLEFT; r; a(3)
-			4 ? a(_); r; SHIFTLEFT; r; a(4)
-			5 ? a(_); r; SHIFTLEFT; r; a(5)
-			6 ? a(_); r; SHIFTLEFT; r; a(6)
-			7 ? a(_); r; SHIFTLEFT; r; a(7)
-			8 ? a(_); r; SHIFTLEFT; r; a(8)
-			9 ? a(_); r; SHIFTLEFT; r; a(9)
+			0 ? DO () != _ ? r; IF _ ? r; FI; OD; a(0)
+			1 ? DO () != _ ? r; IF _ ? r; FI; OD; a(1)
+			2 ? DO () != _ ? r; IF _ ? r; FI; OD; a(2)
+			3 ? DO () != _ ? r; IF _ ? r; FI; OD; a(3)
+			4 ? DO () != _ ? r; IF _ ? r; FI; OD; a(4)
+			5 ? DO () != _ ? r; IF _ ? r; FI; OD; a(5)
+			6 ? DO () != _ ? r; IF _ ? r; FI; OD; a(6)
+			7 ? DO () != _ ? r; IF _ ? r; FI; OD; a(7)
+			8 ? DO () != _ ? r; IF _ ? r; FI; OD; a(8)
+			9 ? DO () != _ ? r; IF _ ? r; FI; OD; a(9)
 		FI;
 		r;
-	END MOVELASTDIGIT;
+	END COPYLASTDIGIT;
 
 	MT SUMDIGITS; "Summing 2 digits by modulo 10"
 		BEGIN
@@ -244,34 +245,32 @@ MT SUM;
 	ISLESS; l;
 	IF T ? a(_); l; K2; ELSE a(_); l; FI;
 
-	L**2; SHIFTRIGHT**2; R**2; l;
-	DO () != _ ? "_w1x_w2y"
-		L; MOVELASTDIGIT; L; MOVELASTDIGIT;
+	l;"_w1x_w2y"
+	IF () != _ ?
+		L; COPYLASTDIGIT; L; COPYLASTDIGIT; "_w1x_w2y_x_y_"
 		ISCARRYNEEDED; l;
-
-		IF T ? a(_); l; L**3; DOCARRY; R**3;
-		ELSE a(_); l; FI;
-		
-		SUMDIGITS; l;
-		IF
-			0 ? a(_); l; L**2; SHIFTRIGHT; l; a(0);
-			1 ? a(_); l; L**2; SHIFTRIGHT; l; a(1);
-			2 ? a(_); l; L**2; SHIFTRIGHT; l; a(2);
-			3 ? a(_); l; L**2; SHIFTRIGHT; l; a(3);
-			4 ? a(_); l; L**2; SHIFTRIGHT; l; a(4);
-			5 ? a(_); l; L**2; SHIFTRIGHT; l; a(5);
-			6 ? a(_); l; L**2; SHIFTRIGHT; l; a(6);
-			7 ? a(_); l; L**2; SHIFTRIGHT; l; a(7);
-			8 ? a(_); l; L**2; SHIFTRIGHT; l; a(8);
-			9 ? a(_); l; L**2; SHIFTRIGHT; l; a(9);
-		FI;
-		r; R**2; l;
-	OD;
-	K2; REVERSE; K3; K2; L; SHIFTLEFT;
-	L; r;
-	DO
-		0 ? r; IF () != _ ? l; SHIFTLEFT; L; r; FI;
-	OD;
-	L;
- ENORM;
+		IF T ? a(_); l; L**3; l; "skip copied digit" DOCARRY; R**3;
+			 F ? a(_); l; FI;
+		SUMDIGITS;
+		K3**2; "_w1x_w2y_(x+y mod 10)_w1x_w2y_"
+		l; a(_); L; l; a(_); "remove copied digits"
+		R**2; "..._(x+y%10)_w1__w2_"
+		K4 ** 2; K3; "..._(x+y%10)_w1_w2_"
+		l;
+		DO () != _ ? "_tail_w1x_w2y_"
+			L; COPYLASTDIGIT; L; COPYLASTDIGIT; "_tail_w1x_w2y_x_y_"
+			ISCARRYNEEDED; l;
+			IF T ? a(_); l; L**3; l; "skip copied digit" DOCARRY; R**3;
+				 F ? a(_); l; FI;
+			SUMDIGITS; "_tail_w1x_w2y_(x+y mod 10)_"
+			K4; L; SHIFTLEFT; "_tail_w1x_w2y_newtail_" 
+			K3**2; "..._newtail_w1x_w2y_"
+			l; a(_); L; l; a(_); "remove copied digits"
+			R**2; "..._newtail_w1__w2_"
+		K4 ** 2; K3; "..._newtail_w1_w2_"
+		l;
+		OD; "..._tail_w1_"
+		K2; L; SHIFTLEFT; "..._tail_w1tail_"
+	FI;
+	L; ENORM;
 END SUM

@@ -1,7 +1,34 @@
 MT MAIN;
 	BEGIN
 	ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
-	MT SHIFTLEFT; LIB;
 	MT L; LIB;
-	L; r; SHIFTLEFT;
+	MT R; LIB;
+	MT BNORM; LIB;
+	MT ENORM; LIB;
+	MT SUM; LIB;
+	MT MULT; LIB;
+	MT DIVIDE; LIB;
+	MT GCD; LIB;
+	MT REMSLASH; LIB;
+	MT K3; LIB;
+	MT K4; LIB;
+	MT K5; LIB;
+	MT K6; LIB;
+	MT K7; LIB;
+	MT K8; LIB;
+	MT K9; LIB;
+	
+	"_w1/w2_w3/w4_"
+	BNORM;
+	K3**2; "_w1/w2_w3/w4_#_w1/w2_w3/w4_"
+	L; REMSLASH; R; REMSLASH; "..._#_w1_w2_w3_w4_"
+	K3; GCD; "..._#_w1_w2_w3_w4_w2_(gcd(w2, w4))_ = ..._#_w1_w2_w3_w4_w2_G_"
+	BNORM; K3**2; DIVIDE; L; ENORM; "..._#_w1_w2_w3_w4_w2_G_(w2 // G)_"
+	BNORM; K5; K4; DIVIDE; L; ENORM; "..._#_w1_w2_w3_w4_w2_G_(w2 // G)_(w4 // G)_ ; w4//G = D4 below, w2//G = D2 below"
+	BNORM; K9; K3; MULT; L; ENORM; "..._#_w1_w2_w3_w4_w2_G_D2_D4_(w1 x D4)_ ; w1xD4 = U1, w3xD2 = U3"
+	BNORM; K8; K5; MULT; L; ENORM; "..._#_w1_w2_w3_w4_w2_G_D2_D4_U1_U3_"
+	SUM; "..._#_w1_w2_w3_w4_G_D4_D2_U1_U3_(U1 + U3)_"
+	BNORM; K7**3; MULT; K4; MULT; L; ENORM; "..._#_w1_w2_w3_w4_G_D4_D2_U1_U3_(U1 + U3)_(G x D2 x D4)"
+	L; a(/); L;
+	ENORM; "_w1/w2_w3/w4_(U1 + U2)/(G x D2 x D4)"
 END MAIN

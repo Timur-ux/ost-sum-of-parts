@@ -1,0 +1,49 @@
+"Divides 2 numbers by counting differences _w1_w2_ => _w1_w2_(w1//w2)_. Normalized"
+MT DIVIDE;
+	BEGIN
+	ALPHABET: 0,1,2,3,4,5,6,7,8,9,F,T;
+	MT BNORM; LIB;
+	MT ENORM; LIB;
+	MT L; LIB;
+	MT R; LIB;
+	MT ISLESS; LIB;
+	MT SHIFTRIGHT; LIB;
+	MT K2; LIB;
+	MT K3; LIB;
+	MT K4; LIB;
+	MT DIFF; LIB;
+
+	MT INCREASE; "Destructable"
+		BEGIN
+		ALPHABET: 0,1,2,3,4,5,6,7,8,9;
+		l;
+		IF
+			0 ? a(1);
+			1 ? a(2);
+			2 ? a(3);
+			3 ? a(4);
+			4 ? a(5);
+			5 ? a(6);
+			6 ? a(7);
+			7 ? a(8);
+			8 ? a(9);
+			9 ? a(0); INCREASE;
+			_ ? SHIFTRIGHT; a(1);
+		FI;
+		R;
+	END INCREASE;
+
+	BNORM;
+	r; a(0); r;
+	K4**2; "_cnt_w1_w2_"
+	ISLESS; l;
+	DO F ?
+		a(_); l; "_cnt_w1_w2_"
+		DIFF; "_cnt_w1_w2_(w1 - w2)_"
+		K4; INCREASE; "_cnt_w1_w2_(w1 - w2)_(cnt + 1)_"
+		K2; K4; "_cnt_w1_w2_(w1 - w2)_(cnt + 1)_(w1 - w2)_w2_"
+		ISLESS; l;  "..._(cnt + 1)_(w1 - w2)_w2_(T|F)"
+	OD; "..._newcnt_r_w2_T"
+	a(_); l; K3; "..._newcnt_r_w2_newcnt_"
+	L; ENORM; "_w1_w2_newcnt"
+END DIVIDE

@@ -1,33 +1,33 @@
-flags=-g
+flags=-b
 libdir=./compiledLibs/
-all: ./main.ost L.tu4 R.tu4 BNorm.tu4 ENorm.tu4 Sum.tu4 Mult.tu4 Divide.tu4 GCD.tu4 RemSlash.tu4 K3.tu4 K4.tu4 K6.tu4 K7.tu4 K8.tu4 K9.tu4
+all: ./main.ost L.tu4 R.tu4 BNorm.tu4 ENorm.tu4 Sum.tu4 Mult.tu4 Divide.tu4 GCD.tu4 RemSlash.tu4 K3.tu4 K4.tu4 K5.tu4 K6.tu4 K7.tu4 K8.tu4 K9.tu4
 	ost ./main.ost -l ${libdir} -o ./ ${flags}
 
-K.tu4: ./libs/K.ost
+K.tu4: ./libs/K.ost L.tu4 R.tu4
 	ost ./libs/K.ost -l ${libdir} -o ${libdir} ${flags}
 
-K2.tu4: ./libs/K2.ost
+K2.tu4: ./libs/K2.ost L.tu4 R.tu4
 	ost ./libs/K2.ost -l ${libdir} -o ${libdir} ${flags}
 
-K3.tu4: ./libs/K3.ost
+K3.tu4: ./libs/K3.ost L.tu4 R.tu4
 	ost ./libs/K3.ost -l ${libdir} -o ${libdir} ${flags}
 
-K4.tu4: ./libs/K4.ost
+K4.tu4: ./libs/K4.ost L.tu4 R.tu4
 	ost ./libs/K4.ost -l ${libdir} -o ${libdir} ${flags}
 
-K5.tu4: ./libs/K5.ost
+K5.tu4: ./libs/K5.ost L.tu4 R.tu4
 	ost ./libs/K5.ost -l ${libdir} -o ${libdir} ${flags}
 
-K6.tu4: ./libs/K6.ost
+K6.tu4: ./libs/K6.ost L.tu4 R.tu4
 	ost ./libs/K6.ost -l ${libdir} -o ${libdir} ${flags}
 
-K7.tu4: ./libs/K7.ost
+K7.tu4: ./libs/K7.ost L.tu4 R.tu4
 	ost ./libs/K7.ost -l ${libdir} -o ${libdir} ${flags}
 
-K8.tu4: ./libs/K8.ost
+K8.tu4: ./libs/K8.ost L.tu4 R.tu4
 	ost ./libs/K8.ost -l ${libdir} -o ${libdir} ${flags}
 
-K9.tu4: ./libs/K9.ost
+K9.tu4: ./libs/K9.ost L.tu4 R.tu4
 	ost ./libs/K9.ost -l ${libdir} -o ${libdir} ${flags}
 
 L.tu4: ./libs/L.ost
@@ -69,13 +69,13 @@ IsEqual.tu4: ./libs/IsEqual.ost ENorm.tu4 BNorm.tu4 K3.tu4 L.tu4 Reverse.tu4 Cmp
 GCD.tu4: ./libs/GCD.ost ENorm.tu4 BNorm.tu4 K3.tu4 K2.tu4 L.tu4 Diff.tu4 IsEqual.tu4 IsLess.tu4
 	ost ./libs/GCD.ost -l ${libdir} -o ${libdir} ${flags}
 
-Sum.tu4: ./libs/Sum.ost ENorm.tu4 BNorm.tu4 K2.tu4 K3.tu4 L.tu4 R.tu4 IsLess.tu4 ShiftLeft.tu4 ShiftRight.tu4 Reverse.tu4 
+Sum.tu4: ./libs/Sum.ost ENorm.tu4 BNorm.tu4 K2.tu4 K3.tu4 K4.tu4 L.tu4 R.tu4 IsLess.tu4 ShiftLeft.tu4 ShiftRight.tu4 Reverse.tu4 
 	ost ./libs/Sum.ost -l ${libdir} -o ${libdir} ${flags}
 
 Mult.tu4: ./libs/Mult.ost ENorm.tu4 BNorm.tu4 K3.tu4 L.tu4 R.tu4 K4.tu4
 	ost ./libs/Mult.ost -l ${libdir} -o ${libdir} ${flags}
 
-Divide.tu4: ./libs/Divide.ost ENorm.tu4 BNorm.tu4 K2.tu4 K3.tu4 L.tu4 R.tu4 K4.tu4  ShiftRight.tu4 IsLess.tu4
+Divide.tu4: ./libs/Divide.ost ENorm.tu4 BNorm.tu4 K2.tu4 Diff.tu4 K3.tu4 L.tu4 R.tu4 K4.tu4  ShiftRight.tu4 IsLess.tu4
 	ost ./libs/Divide.ost -l ${libdir} -o ${libdir} ${flags}
 
 

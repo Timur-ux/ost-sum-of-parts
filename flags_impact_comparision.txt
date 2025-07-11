@@ -1,5 +1,0 @@
--b,-g				file			size		load time
- NO, YES		MAIN.tu4	192M		13873ms
- YES, YES		MAIN.tu4	369M		6731ms
- NO, NO			MAIN.tu4	67M			6624ms
- YES, NO		MAIN.tu4	94M			3549ms

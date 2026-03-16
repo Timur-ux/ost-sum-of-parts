@@ -2,6 +2,7 @@ flags=-b
 libdir=./compiledLibs/
 
 all:
+	echo $(PATH)
 	ostbuild main.ost -l ${libdir} -s ./libs/,./ ${flags}
 
 debug:

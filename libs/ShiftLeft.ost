@@ -5,24 +5,24 @@ MT SHIFTLEFT;
 	ALPHABET: #,/,0,1,2,3,4,5,6,7,8,9,F,T;
 	r;
 	IF
-		0 ? l; a(0); r; SHIFTLEFT
-		1 ? l; a(1); r; SHIFTLEFT
-		2 ? l; a(2); r; SHIFTLEFT
-		3 ? l; a(3); r; SHIFTLEFT
-		4 ? l; a(4); r; SHIFTLEFT
-		5 ? l; a(5); r; SHIFTLEFT
-		6 ? l; a(6); r; SHIFTLEFT
-		7 ? l; a(7); r; SHIFTLEFT
-		8 ? l; a(8); r; SHIFTLEFT
-		9 ? l; a(9); r; SHIFTLEFT
-		T ? l; a(T); r; SHIFTLEFT
-		F ? l; a(F); r; SHIFTLEFT
-		/ ? l; a(/); r; SHIFTLEFT
-		# ? l; a(#); r; SHIFTLEFT
-		_ ? l; a(_); r**2; 
+		| 0 ? l; a(0); r; SHIFTLEFT
+		| 1 ? l; a(1); r; SHIFTLEFT
+		| 2 ? l; a(2); r; SHIFTLEFT
+		| 3 ? l; a(3); r; SHIFTLEFT
+		| 4 ? l; a(4); r; SHIFTLEFT
+		| 5 ? l; a(5); r; SHIFTLEFT
+		| 6 ? l; a(6); r; SHIFTLEFT
+		| 7 ? l; a(7); r; SHIFTLEFT
+		| 8 ? l; a(8); r; SHIFTLEFT
+		| 9 ? l; a(9); r; SHIFTLEFT
+		| T ? l; a(T); r; SHIFTLEFT
+		| F ? l; a(F); r; SHIFTLEFT
+		| / ? l; a(/); r; SHIFTLEFT
+		| # ? l; a(#); r; SHIFTLEFT
+		| _ ? l; a(_); r**2; 
 		IF 
-			() != _ ? l**2; a(_); r; SHIFTLEFT
-			_ ? l**2
+			| () != _ ? l**2; a(_); r; SHIFTLEFT
+			| _ ? l**2
 		FI;
 	FI; 
 END SHIFTLEFT

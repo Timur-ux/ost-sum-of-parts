@@ -1,4 +1,4 @@
-flags=-b
+flags ?=
 libdir=./compiledLibs/
 
 all:
